@@ -382,21 +382,21 @@ export class GameHUD {
 
 	}
 
-	renderInventory() {
+renderInventory() {
 
-		const s = this.game.state;
-		const rows = s.inventory.map( ( f ) => `<div class="gm-row has-cm"><span>${ FISH[ f.species ].name }${ f.record ? '<small>record</small>' : '' }</span><span class="gm-cm">${ f.cm ?? Math.round( fishLengthCm( f.species, f.kg ) ) } cm</span><span class="gm-kg">${ f.kg.toFixed( 2 ) } kg</span><span class="gm-val">$${ f.value }</span><button class="gm-mini" data-release="${ f.id }">Release</button></div>` ).join( '' );
-		const logged = Object.entries( s.log ).filter( ( [ k ] ) => FISH[ k ] ).map( ( [ k, v ] ) => `${ FISH[ k ].name }: ${ v.count } caught, best ${ v.bestKg.toFixed( 2 ) } kg · ${ v.bestCm ?? Math.round( fishLengthCm( k, v.bestKg ) ) } cm` ).join( '<br>' );
-		this.inv.innerHTML = `
-			<h2>${ s.upgrades.hold > 0 ? 'Fish hold' : 'Cooler' }</h2>
-			<p class="gm-sub">${ s.inventory.length } fish · ${ s.holdKg.toFixed( 1 ) } of ${ s.stats.holdKg } kg · worth $${ s.holdValue }</p>
-			<div class="gm-list">${ rows || '<div class="gm-empty">Nothing yet. Cast from the pier, the beach or the boat.</div>' }</div>
-			${ logged ? `<div class="gm-log"><b>Fish log</b><br>${ logged }</div>` : '' }
-			<div class="gm-foot"><span class="gm-sub">Sell at the fish stand by the pier</span><button class="gm-btn is-ghost" data-close>Close (I)</button></div>`;
-		this.inv.querySelector( '[data-close]' ).onclick = () => this.toggleInventory( false );
-		for ( const b of this.inv.querySelectorAll( '[data-release]' ) ) b.onclick = () => s.release( Number( b.dataset.release ) );
+    const s = this.game.state;
+    const rows = s.inventory.map( ( f ) => `<div class="gm-row has-cm"><span>${ FISH[ f.species ].name }${ f.record ? '<small>纪录</small>' : '' }</span><span class="gm-cm">${ f.cm ?? Math.round( fishLengthCm( f.species, f.kg ) ) } cm</span><span class="gm-kg">${ f.kg.toFixed( 2 ) } kg</span><span class="gm-val">$${ f.value }</span><button class="gm-mini" data-release="${ f.id }">放生</button></div>` ).join( '' );
+    const logged = Object.entries( s.log ).filter( ( [ k, v ] ) => FISH[ k ] ).map( ( [ k, v ] ) => `${ FISH[ k ].name }：${ v.count } 条，最佳 ${ v.bestKg.toFixed( 2 ) } kg · ${ v.bestCm ?? Math.round( fishLengthCm( k, v.bestKg ) ) } cm` ).join( '<br>' );
+    this.inv.innerHTML = `
+        <h2>${ s.upgrades.hold > 0 ? '鱼舱' : '冷藏箱' }</h2>
+        <p class="gm-sub">${ s.inventory.length } 条鱼 · ${ s.holdKg.toFixed( 1 ) } / ${ s.stats.holdKg } kg · 价值 $${ s.holdValue }</p>
+        <div class="gm-list">${ rows || '<div class="gm-empty">还没有鱼。从码头、沙滩或船上抛竿。</div>' }</div>
+        ${ logged ? `<div class="gm-log"><b>鱼类图鉴</b><br>${ logged }</div>` : '' }
+        <div class="gm-foot"><span class="gm-sub">到码头边的鱼摊出售</span><button class="gm-btn is-ghost" data-close>关闭 (I)</button></div>`;
+    this.inv.querySelector( '[data-close]' ).onclick = () => this.toggleInventory( false );
+    for ( const b of this.inv.querySelectorAll( '[data-release]' ) ) b.onclick = () => s.release( Number( b.dataset.release ) );
 
-	}
+}
 
 	// ---- fish stand
 	openStand( vendor ) {
@@ -438,29 +438,29 @@ renderStand() {
 
 GameHUD.prototype.renderShop = function () {
 
-	const s = this.game.state;
-	const v = this.vendor;
-	const rows = Object.entries( UPGRADES ).map( ( [ key, track ] ) => {
+    const s = this.game.state;
+    const v = this.vendor;
+    const rows = Object.entries( UPGRADES ).map( ( [ key, track ] ) => {
 
-		const cur = track.levels[ s.upgrades[ key ] | 0 ];
-		const next = nextLevel( s.upgrades, key );
-		const btn = next
-			? `<button class="gm-btn" data-buy="${ key }" ${ next.cost > s.money ? 'disabled' : '' }>$${ next.cost }</button>`
-			: '<span class="gm-have">Top of the line</span>';
-		return `<div class="gm-shop-row"><span>${ track.name }: ${ next ? next.label : cur.label }<small>Now: ${ cur.label }</small></span>${ btn }</div>`;
+        const cur = track.levels[ s.upgrades[ key ] | 0 ];
+        const next = nextLevel( s.upgrades, key );
+        const btn = next
+            ? `<button class="gm-btn" data-buy="${ key }" ${ next.cost > s.money ? 'disabled' : '' }>$${ next.cost }</button>`
+            : '<span class="gm-have">顶级</span>';
+        return `<div class="gm-shop-row"><span>${ track.name }：${ next ? next.label : cur.label }<small>当前：${ cur.label }</small></span>${ btn }</div>`;
 
-	} ).join( '' );
-	const missing = s.stats.fuelL - s.fuelL;
-	const fuelRow = `<div class="gm-shop-row"><span>Diesel · $${ FUEL_PRICE.toFixed( 2 ) } / L<small>Tank: ${ s.fuelL.toFixed( 0 ) } of ${ s.stats.fuelL } L</small></span>${ missing > 0.5 ? `<button class="gm-btn" data-fuel ${ s.money < FUEL_PRICE ? 'disabled' : '' }>Fill · $${ s.refuelCost() }</button>` : '<span class="gm-have">Full</span>' }</div>`;
-	this.stand.innerHTML = `
-		<h2>${ v.name }</h2>
-		<p class="gm-sub">${ v.greeting } · You have $${ s.money.toLocaleString() }</p>
-		<div class="gm-list">${ fuelRow }${ rows }</div>
-		<div class="gm-foot"><span class="gm-sub">Upgrades take effect at once</span><button class="gm-btn is-ghost" data-close>Leave (E)</button></div>`;
-	this.stand.querySelector( '[data-close]' ).onclick = () => this.closeStand();
-	for ( const b of this.stand.querySelectorAll( '[data-buy]' ) ) b.onclick = () => this.game.buy( b.dataset.buy );
-	const f = this.stand.querySelector( '[data-fuel]' );
-	if ( f ) f.onclick = () => this.game.refuel();
+    } ).join( '' );
+    const missing = s.stats.fuelL - s.fuelL;
+    const fuelRow = `<div class="gm-shop-row"><span>柴油 · $${ FUEL_PRICE.toFixed( 2 ) } / L<small>油箱：${ s.fuelL.toFixed( 0 ) } / ${ s.stats.fuelL } L</small></span>${ missing > 0.5 ? `<button class="gm-btn" data-fuel ${ s.money < FUEL_PRICE ? 'disabled' : '' }>加满 · $${ s.refuelCost() }</button>` : '<span class="gm-have">已满</span>' }</div>`;
+    this.stand.innerHTML = `
+        <h2>${ v.name }</h2>
+        <p class="gm-sub">${ v.greeting } · 你有 $${ s.money.toLocaleString() }</p>
+        <div class="gm-list">${ fuelRow }${ rows }</div>
+        <div class="gm-foot"><span class="gm-sub">升级立即生效</span><button class="gm-btn is-ghost" data-close>离开 (E)</button></div>`;
+    this.stand.querySelector( '[data-close]' ).onclick = () => this.closeStand();
+    for ( const b of this.stand.querySelectorAll( '[data-buy]' ) ) b.onclick = () => this.game.buy( b.dataset.buy );
+    const f = this.stand.querySelector( '[data-fuel]' );
+    if ( f ) f.onclick = () => this.game.refuel();
 
 };
 
