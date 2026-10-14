@@ -418,21 +418,21 @@ export class GameHUD {
 
 	}
 
-	renderStand() {
+renderStand() {
 
-		const s = this.game.state;
-		const v = this.vendor || { name: 'Fish buyer' };
-		const rows = s.inventory.map( ( f ) => `<div class="gm-row has-cm"><span>${ FISH[ f.species ].name }</span><span class="gm-cm">${ f.cm ?? Math.round( fishLengthCm( f.species, f.kg ) ) } cm</span><span class="gm-kg">${ f.kg.toFixed( 2 ) } kg</span><span class="gm-val">$${ f.value }</span><button class="gm-mini" data-sell="${ f.id }">Sell</button></div>` ).join( '' );
-		this.stand.innerHTML = `
-			<h2>${ v.name }</h2>
-			<p class="gm-sub">${ s.inventory.length ? v.greeting || 'Let\'s see what you caught.' : v.idle || 'Come back when you\'ve got fish.' }</p>
-			<div class="gm-list">${ rows || '<div class="gm-empty">Your cooler is empty.</div>' }</div>
-			<div class="gm-foot"><button class="gm-btn is-ghost" data-close>Leave (E)</button><button class="gm-btn" data-all ${ s.inventory.length ? '' : 'disabled' }>Sell all · $${ s.holdValue }</button></div>`;
-		this.stand.querySelector( '[data-close]' ).onclick = () => this.closeStand();
-		this.stand.querySelector( '[data-all]' ).onclick = () => this.game.sellAll();
-		for ( const b of this.stand.querySelectorAll( '[data-sell]' ) ) b.onclick = () => this.game.sell( [ Number( b.dataset.sell ) ] );
+    const s = this.game.state;
+    const v = this.vendor || { name: '鱼贩' };
+    const rows = s.inventory.map( ( f ) => `<div class="gm-row has-cm"><span>${ FISH[ f.species ].name }</span><span class="gm-cm">${ f.cm ?? Math.round( fishLengthCm( f.species, f.kg ) ) } cm</span><span class="gm-kg">${ f.kg.toFixed( 2 ) } kg</span><span class="gm-val">$${ f.value }</span><button class="gm-mini" data-sell="${ f.id }">出售</button></div>` ).join( '' );
+    this.stand.innerHTML = `
+        <h2>${ v.name }</h2>
+        <p class="gm-sub">${ s.inventory.length ? v.greeting || '让我看看你钓到了什么。' : v.idle || '有鱼再来吧。' }</p>
+        <div class="gm-list">${ rows || '<div class="gm-empty">你的冷藏箱是空的。</div>' }</div>
+        <div class="gm-foot"><button class="gm-btn is-ghost" data-close>离开 (E)</button><button class="gm-btn" data-all ${ s.inventory.length ? '' : 'disabled' }>全部出售 · $${ s.holdValue }</button></div>`;
+    this.stand.querySelector( '[data-close]' ).onclick = () => this.closeStand();
+    this.stand.querySelector( '[data-all]' ).onclick = () => this.game.sellAll();
+    for ( const b of this.stand.querySelectorAll( '[data-sell]' ) ) b.onclick = () => this.game.sell( [ Number( b.dataset.sell ) ] );
 
-	}
+}
 
 }
 
