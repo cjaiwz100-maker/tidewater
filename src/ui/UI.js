@@ -2103,7 +2103,7 @@ export class UI {
 		this.pages = h( 'div', 'tw-pages' );
 
 		const foot = h( 'footer', 'tw-panel-foot' );
-		foot.innerHTML = '<span><kbd>H</kbd>Hide</span><span><kbd>F1</kbd>Controls</span><span><kbd>P</kbd>Photo mode</span>';
+foot.innerHTML = '<span><kbd>H</kbd>隐藏</span><span><kbd>F1</kbd>控制</span><span><kbd>P</kbd>拍照</span>';
 		panel.append( head, this.tabBar, this.pages, foot );
 
 		// collapsed state: a slim rail of tab icons
@@ -2131,44 +2131,44 @@ export class UI {
 			<div class="tw-help-card tw-glass">
 				<header class="tw-help-head">
 					<div>
-						<h2 id="tw-help-title">Controls</h2>
-						<p>Click the view to capture the mouse. Esc releases it.</p>
+<h2 id="tw-help-title">控制</h2>
+<p>点击画面捕捉鼠标。Esc 释放。</p>
 					</div>
-					<button type="button" class="tw-icon-btn tw-help-close" aria-label="Close" data-tip="Close (F1)">${ icon( 'close' ) }</button>
+<button ... aria-label="关闭" data-tip="关闭 (F1)">
 				</header>
 				<div class="tw-help-grid">
 					<section>
-						<h3>Move</h3>
-						${ row( wasd, 'Move' ) }
-						${ row( mouse, 'Look around<small>Click to capture</small>' ) }
-						${ row( k( 'Shift' ), 'Sprint, boat boost' ) }
-						${ row( k( 'Space' ), 'Jump, swim up' ) }
-						${ row( k( 'C' ), 'Crouch, dive' ) }
+<h3>移动</h3>
+${ row( wasd, '移动' ) }
+${ row( mouse, '环顾<small>点击捕捉</small>' ) }
+${ row( k( 'Shift' ), '冲刺、船只加速' ) }
+${ row( k( 'Space' ), '跳跃、上浮' ) }
+${ row( k( 'C' ), '蹲下、潜水' ) }
 					</section>
 					<section>
-						<h3>Interact</h3>
-						${ row( k( 'E' ), 'Interact<small>Board, helm, step ashore, trade</small>' ) }
-						${ row( k( 'V' ), 'Boat camera<small>1st / 3rd person</small>' ) }
-						${ row( k( 'R' ), 'Fishing rod<small>Take out / put away</small>' ) }
-						${ row( k( 'LMB' ), 'Cast, strike, reel<small>Hold to wind up / reel</small>' ) }
-						${ row( k( 'RMB' ), 'Reel in an empty line' ) }
-						${ row( k( 'I' ), 'Cooler and fish log' ) }
-						${ row( k( 'F' ), 'Free camera' ) }
-						${ row( k( 'T' ), 'Pause time' ) }
-						${ row( k( 'L' ), 'Flashlight' ) }
-						${ row( k( 'M' ), 'Mute' ) }
+<h3>交互</h3>
+${ row( k( 'E' ), '交互<small>上船、掌舵、上岸、交易</small>' ) }
+${ row( k( 'V' ), '船只相机<small>第一 / 第三人称</small>' ) }
+${ row( k( 'R' ), '鱼竿<small>取出 / 收起</small>' ) }
+${ row( k( 'LMB' ), '抛竿、上钩、收线<small>按住蓄力 / 收线</small>' ) }
+${ row( k( 'RMB' ), '收回空线' ) }
+${ row( k( 'I' ), '冷藏箱和鱼类图鉴' ) }
+${ row( k( 'F' ), '自由视角' ) }
+${ row( k( 'T' ), '暂停时间' ) }
+${ row( k( 'L' ), '手电筒' ) }
+${ row( k( 'M' ), '静音' ) }
 					</section>
 					<section>
-						<h3>Interface</h3>
-						${ row( k( 'H' ), 'Settings panel' ) }
-						${ row( k( 'P' ), 'Photo mode<small>Hides all interface</small>' ) }
-						${ row( k( 'F1' ) + k( '?' ), 'This sheet' ) }
-						${ row( k( 'Esc' ), 'Release the mouse' ) }
+<h3>界面</h3>
+${ row( k( 'H' ), '设置面板' ) }
+${ row( k( 'P' ), '拍照模式<small>隐藏所有界面</small>' ) }
+${ row( k( 'F1' ) + k( '?' ), '本说明' ) }
+${ row( k( 'Esc' ), '释放鼠标' ) }
 					</section>
 				</div>
 				<div class="tw-help-guide">
-					<span><b>How to play:</b> catch fish, sell them to Joe at the fish stand by the pier, and buy upgrades from Marta at the chandlery by the boathouse. Both are on the map (lower right).</span>
-					<button type="button" class="gm-btn is-ghost tw-help-replay">Replay the guide</button>
+<span><b>玩法：</b>钓鱼，卖给码头边鱼摊的乔，到船屋边的玛塔商店买升级。两者都在右下角地图上。</span>
+<button ...>重新播放指南</button>
 				</div>
 			</div>`;
 		el.querySelector( '.tw-help-close' ).addEventListener( 'click', () => this.toggleHelp( false ) );
