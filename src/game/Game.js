@@ -360,7 +360,7 @@ export class Game {
 		for ( const v of this.vendors ) v.talking = !! ( hud && hud.standOpen && hud.vendor === v );
 		if ( hud && hud.standOpen && ( ! near || near !== hud.vendor ) ) hud.closeStand();
 		if ( ! near || this.fight || this._cardDismissed || ( hud && hud.catchOpen ) ) return;
-		if ( ! p.prompt ) p.prompt = { key: 'E', text: hud && hud.standOpen ? 'Leave' : `Talk to ${ near.name.split( ' ·' )[ 0 ] }` };
+if ( ! p.prompt ) p.prompt = { key: 'E', text: hud && hud.standOpen ? '离开' : `与${ near.name.split( ' ·' )[ 0 ] }交谈` };
 		if ( inp.hit( 'KeyE' ) ) {
 
 			if ( ! hud ) {
