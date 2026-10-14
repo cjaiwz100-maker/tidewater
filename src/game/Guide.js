@@ -66,49 +66,49 @@ const k = ( ...keys ) => keys.map( ( x ) => `<kbd>${ x }</kbd>` ).join( '' );
 const row = ( keys, text ) => `<div class="gm-guide-row"><span class="k">${ keys }</span><span>${ text }</span></div>`;
 
 const CARDS = [
-	{
-		eyebrow: 'Welcome to Tidewater',
-		title: 'Fish the island, sell your catch',
-		body: `<p>Catch fish from the <b>beach</b>, the <b>pier</b> or your <b>boat</b>. Different fish bite in the shallows, around the pier, over the reef and out in deep water, and they change with the time of day.</p>
-			<p>Sell your catch to <b>Joe</b> at the fish stand by the pier, then spend the money on upgrades from <b>Marta</b> at the chandlery by the boathouse: stronger line, a faster reel, a bigger hold, a fish finder and lights for fishing at night.</p>`,
-	},
-	{
-		eyebrow: 'Fishing',
-		title: 'Cast, strike, reel',
-		body: `<div class="gm-guide-list">
-			${ row( k( 'R' ), 'Take out the rod (by the water or on the boat)' ) }
-			${ row( k( 'Hold', 'LMB' ), 'Wind up, release to cast. Hold longer to cast farther' ) }
-			${ row( k( 'LMB' ), 'Strike when the bobber is <b>pulled under</b> (dips are only nibbles)' ) }
-			${ row( k( 'Hold', 'LMB' ), 'Reel in. <b>Let go when the tension turns red</b>, or the line snaps' ) }
-			${ row( k( 'RMB' ), 'Reel an empty line back in' ) }
-			${ row( k( 'I' ), 'Your cooler and fish log' ) }
-		</div>`,
-	},
-	{
-		eyebrow: 'Getting around',
-		title: 'Joe and Marta',
-		body: `<div class="gm-guide-list">
-			${ row( k( 'W', 'A', 'S', 'D' ), 'Move, mouse to look, <kbd>Shift</kbd> to run' ) }
-			${ row( k( 'E' ), 'Board the boat, take the helm, talk to Joe and Marta' ) }
-			${ row( k( 'F1' ), 'All controls, and this guide again' ) }
-		</div>
-		<div class="gm-guide-where">
-			<div class="is-joe"><i></i><span><b>Joe</b> · fish stand by the pier</span><em data-where="joe"></em></div>
-			<div class="is-marta"><i></i><span><b>Marta</b> · chandlery by the boathouse</span><em data-where="marta"></em></div>
-		</div>
-		<p style="margin:0;color:var(--tw-ink-3);font-size:var(--tw-fs-sm)">Both are marked on the map in the lower right.</p>`,
-	},
+    {
+        eyebrow: '欢迎战壕兄弟们来到 渔力人生',
+        title: '在岛上钓鱼，卖掉你的收获',
+        body: `<p>可以从<b>沙滩</b>、<b>码头</b>或你的<b>船</b>上钓鱼。不同的鱼会在浅滩、码头附近、礁石上和深水区咬钩，而且会随一天中的时间变化。</p>
+            <p>把鱼卖给码头边鱼摊的<b>乔</b>，然后去船屋边的<b>玛塔</b>商店买升级：更强的线、更快的卷线器、更大的鱼舱、探鱼器和夜间钓鱼灯。</p>`,
+    },
+    {
+        eyebrow: '钓鱼',
+        title: '抛竿、上钩、收线',
+        body: `<div class="gm-guide-list">
+            ${ row( k( 'R' ), '取出鱼竿（在水边或船上）' ) }
+            ${ row( k( '按住', '左键' ), '蓄力后松开抛竿。按得越久抛得越远' ) }
+            ${ row( k( '左键' ), '浮漂被<b>拉下水</b>时点击上钩（轻点只是试探）' ) }
+            ${ row( k( '按住', '左键' ), '收线。<b>张力变红时松开</b>，否则会断线' ) }
+            ${ row( k( '右键' ), '收回空线' ) }
+            ${ row( k( 'I' ), '冷藏箱和鱼类图鉴' ) }
+        </div>`,
+    },
+    {
+        eyebrow: '移动与交互',
+        title: '乔和玛塔',
+        body: `<div class="gm-guide-list">
+            ${ row( k( 'W', 'A', 'S', 'D' ), '移动，鼠标看向四周，<kbd>Shift</kbd> 奔跑' ) }
+            ${ row( k( 'E' ), '上船、掌舵、与乔和玛塔交易' ) }
+            ${ row( k( 'F1' ), '所有控制说明，以及再次查看本指南' ) }
+        </div>
+        <div class="gm-guide-where">
+            <div class="is-joe"><i></i><span><b>乔</b> · 码头边的鱼摊</span><em data-where="joe"></em></div>
+            <div class="is-marta"><i></i><span><b>玛塔</b> · 船屋边的商店</span><em data-where="marta"></em></div>
+        </div>
+        <p style="margin:0;color:var(--tw-ink-3);font-size:var(--tw-fs-sm)">两者都在右下角的地图上标出。</p>`,
+    },
 ];
 
 const TIPS = {
-	rodOut: 'Hold the <b>left mouse button</b> to wind up and release to cast. Try deeper water, around the pier or over the reef.',
-	nibble: 'The bobber is dipping: something is <b>nibbling</b>. Wait until it is <b>pulled under</b>, then click to strike.',
-	fishOn: '<b>Hold the left mouse button</b> to reel. When the tension needle nears the <b>red</b>, let go until it settles, then reel again.',
-	caught: 'Into the cooler (<kbd>I</kbd>). Sell your catch to <b>Joe</b> at the fish stand by the pier: he is on the map.',
-	full: 'Your cooler is <b>full</b>. Sell to Joe, or buy a bigger hold from Marta at the chandlery.',
-	boat: 'Your boat. <kbd>E</kbd> to board, <kbd>E</kbd> again at the wheel to drive (<kbd>W</kbd><kbd>S</kbd> throttle, <kbd>A</kbd><kbd>D</kbd> steer). Diesel is sold by Marta.',
-	joe: '<b>Joe</b> buys your fish. <kbd>E</kbd> to see what he will pay.',
-	marta: '<b>Marta</b> sells upgrades and diesel. <kbd>E</kbd> to see her stock.',
+    rodOut: '按住<b>左键</b>蓄力后松开抛竿。试试更深的水域、码头附近或礁石上方。',
+    nibble: '浮漂在跳动：有东西在<b>试探</b>。等它被<b>拉下水</b>后再点击上钩。',
+    fishOn: '<b>按住左键</b>收线。张力指针接近<b>红色</b>时松开，等它稳定后再继续收。',
+    caught: '已放入冷藏箱（<kbd>I</kbd>）。把鱼卖给码头边鱼摊的<b>乔</b>：他在地图上。',
+    full: '你的冷藏箱<b>满了</b>。卖给乔，或者去玛塔那里买更大的鱼舱。',
+    boat: '你的船。<kbd>E</kbd> 上船，在方向盘再按 <kbd>E</kbd> 驾驶（<kbd>W</kbd><kbd>S</kbd> 油门，<kbd>A</kbd><kbd>D</kbd> 转向）。柴油在玛塔那里买。',
+    joe: '<b>乔</b>收购你的鱼。<kbd>E</kbd> 查看他出价。',
+    marta: '<b>玛塔</b>出售升级和柴油。<kbd>E</kbd> 查看库存。',
 };
 
 const h = ( tag, cls, html ) => {
