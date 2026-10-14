@@ -3514,14 +3514,14 @@ el.innerHTML = `
 		} } );
 
 		// HUD: cycle through traversal modes so every contextual element shows up
-		const MODES = [
-			[ 'Boat · 3rd person', 'E', 'Leave boat' ],
-			[ 'Boat · 1st person', 'V', 'Third-person camera' ],
-			[ 'Walking', 'E', 'Board boat' ],
-			[ 'Swimming', 'Space', 'Swim up' ],
-			[ 'Diving', null, null ],
-			[ 'Free camera', 'F', 'Leave free camera' ],
-		];
+const MODES = [
+    [ '船只 · 第三人称', 'E', '离开船只' ],
+    [ '船只 · 第一人称', 'V', '第三人称视角' ],
+    [ '步行', 'E', '上船' ],
+    [ '游泳', 'Space', '上浮' ],
+    [ '潜水', null, null ],
+    [ '自由视角', 'F', '退出自由视角' ],
+];
 		let mode = 0, next = 8, raf = 0;
 		ui.setMode( MODES[ 0 ][ 0 ] );
 		ui.setPrompt( MODES[ 0 ][ 1 ], MODES[ 0 ][ 2 ] );
