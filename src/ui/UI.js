@@ -2185,19 +2185,19 @@ export class UI {
 	_buildStart() {
 
 		const el = this.startEl = h( 'div', 'tw-start tw-interactive', { hidden: true } );
-		el.innerHTML = `
-			<div class="tw-start-inner">
-				${ brandMark( 'tw-start-mark' ) }
-				<div class="tw-start-title">TIDEWATER</div>
-				<button type="button" class="tw-start-cta"><span class="tw-start-pulse" aria-hidden="true"></span>${ icon( 'mouse' ) }<span>Click to explore</span></button>
-				<div class="tw-start-keys">
-					<span><span class="tw-wasd"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span>Move</span>
-					<span><kbd class="tw-kbd-ico">${ icon( 'mouse' ) }</kbd>Look</span>
-					<span><kbd>E</kbd>Interact</span>
-					<span><kbd>H</kbd>Settings</span>
-					<span><kbd>F1</kbd>All controls</span>
-				</div>
-			</div>`;
+el.innerHTML = `
+    <div class="tw-start-inner">
+        ${ brandMark( 'tw-start-mark' ) }
+        <div class="tw-start-title">渔力人生</div>
+        <button type="button" class="tw-start-cta"><span class="tw-start-pulse" aria-hidden="true"></span>${ icon( 'mouse' ) }<span>点击开始探索</span></button>
+        <div class="tw-start-keys">
+            <span><span class="tw-wasd"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span>移动</span>
+            <span><kbd class="tw-kbd-ico">${ icon( 'mouse' ) }</kbd>视角</span>
+            <span><kbd>E</kbd>交互</span>
+            <span><kbd>H</kbd>设置</span>
+            <span><kbd>F1</kbd>全部控制</span>
+        </div>
+    </div>`;
 		this.root.append( el );
 
 	}
