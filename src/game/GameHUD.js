@@ -299,63 +299,60 @@ export class GameHUD {
 
 	// ---- catch card
 	// info: GameState.lastCatch ({ species, kg, cm, value, newSpecies, record, prevBestKg, prevBestCm, kept })
-	showCatch( info, ms = 9000 ) {
+showCatch( info, ms = 9000 ) {
 
-		const f = FISH[ info.species ];
-		const inch = info.cm / 2.54, lb = info.kg * 2.20462;
-		const badge = info.record ? '<span class="gm-badge is-record">★ New record</span>'
-			: info.newSpecies ? '<span class="gm-badge is-new">New species</span>' : '<span class="gm-badge is-plain">Catch</span>';
-		let note;
-		if ( ! info.kept ) note = `<div class="gm-catch-note is-warn">No room in the ${ this.game.state.upgrades.hold > 0 ? 'hold' : 'cooler' } · you let it go</div>`;
-		else if ( info.record ) note = `<div class="gm-catch-note">Previous best <b>${ info.prevBestKg.toFixed( 2 ) } kg</b> · ${ info.prevBestCm } cm. Beaten by ${ ( info.kg - info.prevBestKg ).toFixed( 2 ) } kg.</div>`;
-		else if ( info.newSpecies ) note = '<div class="gm-catch-note">First one in your fish log.</div>';
-		else note = `<div class="gm-catch-note">Your best: ${ info.prevBestKg.toFixed( 2 ) } kg · ${ info.prevBestCm } cm</div>`;
-		// splash burst around the fish as it lands in view
-		let drops = '';
-		for ( let i = 0; i < 26; i ++ ) {
+    const f = FISH[ info.species ];
+    const inch = info.cm / 2.54, lb = info.kg * 2.20462;
+    const badge = info.record ? '<span class="gm-badge is-record">★ 新纪录</span>'
+        : info.newSpecies ? '<span class="gm-badge is-new">新物种</span>' : '<span class="gm-badge is-plain">捕获</span>';
+    let note;
+    if ( ! info.kept ) note = `<div class="gm-catch-note is-warn">鱼舱满了 · 你放生了它</div>`;
+    else if ( info.record ) note = `<div class="gm-catch-note">之前最佳 <b>${ info.prevBestKg.toFixed( 2 ) } kg</b> · ${ info.prevBestCm } cm。超出 ${ ( info.kg - info.prevBestKg ).toFixed( 2 ) } kg。</div>`;
+    else if ( info.newSpecies ) note = '<div class="gm-catch-note">鱼类图鉴里的第一条。</div>';
+    else note = `<div class="gm-catch-note">你的最佳：${ info.prevBestKg.toFixed( 2 ) } kg · ${ info.prevBestCm } cm</div>`;
+    let drops = '';
+    for ( let i = 0; i < 26; i ++ ) {
 
-			const a = ( i / 26 ) * Math.PI * 2 + Math.random() * 0.3, r = 90 + Math.random() * 260;
-			drops += `<i style="--s:${ ( 4 + Math.random() * 12 ).toFixed( 1 ) }px;--x:${ ( Math.cos( a ) * r * 1.8 ).toFixed( 0 ) }px;--y:${ ( Math.sin( a ) * r * 0.55 - 40 ).toFixed( 0 ) }px;--d:${ ( 250 + Math.random() * 220 ).toFixed( 0 ) }ms"></i>`;
+        const a = ( i / 26 ) * Math.PI * 2 + Math.random() * 0.3, r = 90 + Math.random() * 260;
+        drops += `<i style="--s:${ ( 4 + Math.random() * 12 ).toFixed( 1 ) }px;--x:${ ( Math.cos( a ) * r * 1.8 ).toFixed( 0 ) }px;--y:${ ( Math.sin( a ) * r * 0.55 - 40 ).toFixed( 0 ) }px;--d:${ ( 250 + Math.random() * 220 ).toFixed( 0 ) }ms"></i>`;
 
-		}
+    }
 
-		const c = this.catchCard;
-		c.style.setProperty( '--gm-catch-ms', `${ ms }ms` );
-		c.innerHTML = `
-			<div class="gm-catch-top">
-				<div class="gm-catch-eyebrow">${ badge }</div>
-				<h2>${ f.name }</h2>
-				<div class="gm-catch-sci">${ f.sci || '' }</div>
-			</div>
-			<div class="gm-catch-stage"><canvas></canvas><div class="gm-splash">${ drops }</div></div>
-			<div class="gm-catch-bottom">
-				<div class="gm-catch-stats">
-					<div class="gm-stat"><span>Length</span><b>${ info.cm }<small>cm</small></b><i>${ inch.toFixed( 1 ) } in</i></div>
-					<div class="gm-stat"><span>Weight</span><b>${ info.kg < 1 ? info.kg.toFixed( 2 ) : info.kg.toFixed( 1 ) }<small>kg</small></b><i>${ lb.toFixed( 1 ) } lb</i></div>
-					<div class="gm-stat is-value"><span>Value</span><b>$${ info.value }</b><i>${ info.kept ? 'in the cooler' : 'let go' }</i></div>
-				</div>
-				${ note }
-				<div class="gm-catch-foot"><kbd>Click</kbd> or <kbd>E</kbd> to continue<span class="gm-catch-timer"><span></span></span></div>
-			</div>`;
-		// restart the entrance even when a card is already up
-		c.classList.remove( 'is-on' );
-		void c.offsetWidth;
-		c.classList.add( 'is-on' );
-		this.catchScrim.classList.add( 'is-on' );
-		this.catchOpen = true;
-		// the fish itself: the real model in a studio, drawn live into the stage canvas
-		try {
+    const c = this.catchCard;
+    c.style.setProperty( '--gm-catch-ms', `${ ms }ms` );
+    c.innerHTML = `
+        <div class="gm-catch-top">
+            <div class="gm-catch-eyebrow">${ badge }</div>
+            <h2>${ f.name }</h2>
+            <div class="gm-catch-sci">${ f.sci || '' }</div>
+        </div>
+        <div class="gm-catch-stage"><canvas></canvas><div class="gm-splash">${ drops }</div></div>
+        <div class="gm-catch-bottom">
+            <div class="gm-catch-stats">
+                <div class="gm-stat"><span>长度</span><b>${ info.cm }<small>cm</small></b><i>${ inch.toFixed( 1 ) } in</i></div>
+                <div class="gm-stat"><span>重量</span><b>${ info.kg < 1 ? info.kg.toFixed( 2 ) : info.kg.toFixed( 1 ) }<small>kg</small></b><i>${ lb.toFixed( 1 ) } lb</i></div>
+                <div class="gm-stat is-value"><span>价值</span><b>$${ info.value }</b><i>${ info.kept ? '在冷藏箱' : '已放生' }</i></div>
+            </div>
+            ${ note }
+            <div class="gm-catch-foot"><kbd>点击</kbd> 或 <kbd>E</kbd> 继续<span class="gm-catch-timer"><span></span></span></div>
+        </div>`;
+    c.classList.remove( 'is-on' );
+    void c.offsetWidth;
+    c.classList.add( 'is-on' );
+    this.catchScrim.classList.add( 'is-on' );
+    this.catchOpen = true;
+    try {
 
-			if ( ! this.portrait ) this.portrait = new FishPortrait();
-			if ( this.portrait.attach( c.querySelector( '.gm-catch-stage canvas' ) ) ) this.portrait.show( info.species, info.kg );
+        if ( ! this.portrait ) this.portrait = new FishPortrait();
+        if ( this.portrait.attach( c.querySelector( '.gm-catch-stage canvas' ) ) ) this.portrait.show( info.species, info.kg );
 
-		} catch ( e ) {
+    } catch ( e ) {
 
-			console.warn( 'fish portrait unavailable', e );
+        console.warn( 'fish portrait unavailable', e );
 
-		}
+    }
 
-	}
+}
 
 	hideCatch() {
 
