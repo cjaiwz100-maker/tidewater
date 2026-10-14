@@ -4,47 +4,45 @@
 //
 // Each track: levels[ 0 ] is what you start with; cost is the price of that level (0 for the first).
 export const UPGRADES = {
-	// rod and reel
-	line: { name: 'Fishing line', levels: [
-		{ cost: 0, label: '8 lb mono', lineKg: 7 },
-		{ cost: 60, label: '15 lb mono', lineKg: 13 },
-		{ cost: 180, label: '30 lb braid', lineKg: 26 },
-		{ cost: 450, label: '60 lb braid', lineKg: 50 },
-	] },
-	reel: { name: 'Reel', levels: [
-		{ cost: 0, label: 'Old spinning reel', reelSpeed: 1.1 },
-		{ cost: 90, label: 'Smooth spinning reel', reelSpeed: 1.6 },
-		{ cost: 320, label: 'Conventional reel', reelSpeed: 2.2 },
-	] },
-	rod: { name: 'Rod', levels: [
-		{ cost: 0, label: 'Hand-me-down rod', castM: 22 },
-		{ cost: 75, label: '7 ft graphite rod', castM: 32 },
-		{ cost: 260, label: '9 ft surf rod', castM: 45 },
-	] },
-	// boat
-	hold: { name: 'Fish hold', levels: [
-		{ cost: 0, label: 'Cooler', holdKg: 30 },
-		{ cost: 120, label: 'Ice chest', holdKg: 70 },
-		{ cost: 400, label: 'Insulated fish hold', holdKg: 160 },
-	] },
-	fuel: { name: 'Fuel tank', levels: [
-		{ cost: 0, label: '40 L tank', fuelL: 40 },
-		{ cost: 150, label: '80 L tank', fuelL: 80 },
-		{ cost: 380, label: '150 L tank', fuelL: 150 },
-	] },
-	engine: { name: 'Engine', levels: [
-		{ cost: 0, label: 'Tired diesel', speedMul: 1 },
-		{ cost: 300, label: 'Rebuilt diesel', speedMul: 1.15 },
-		{ cost: 700, label: 'Turbo diesel', speedMul: 1.3 },
-	] },
-	fishFinder: { name: 'Fish finder', levels: [
-		{ cost: 0, label: 'None', finder: false },
-		{ cost: 250, label: 'Fish finder (depth and fish on the HUD)', finder: true },
-	] },
-	lights: { name: 'Boat lights', levels: [
-		{ cost: 0, label: 'Nav lights only', deckLights: false },
-		{ cost: 140, label: 'Deck floodlights for night fishing', deckLights: true },
-	] },
+    line: { name: '鱼线', levels: [
+        { cost: 0, label: '8 磅单丝', lineKg: 7 },
+        { cost: 60, label: '15 磅单丝', lineKg: 13 },
+        { cost: 180, label: '30 磅编织', lineKg: 26 },
+        { cost: 450, label: '60 磅编织', lineKg: 50 },
+    ] },
+    reel: { name: '卷线器', levels: [
+        { cost: 0, label: '旧纺车轮', reelSpeed: 1.1 },
+        { cost: 90, label: '顺滑纺车轮', reelSpeed: 1.6 },
+        { cost: 320, label: '传统轮', reelSpeed: 2.2 },
+    ] },
+    rod: { name: '鱼竿', levels: [
+        { cost: 0, label: '旧鱼竿', castM: 22 },
+        { cost: 75, label: '7 英尺石墨竿', castM: 32 },
+        { cost: 260, label: '9 英尺冲浪竿', castM: 45 },
+    ] },
+    hold: { name: '鱼舱', levels: [
+        { cost: 0, label: '冷藏箱', holdKg: 30 },
+        { cost: 120, label: '冰柜', holdKg: 70 },
+        { cost: 400, label: '隔热鱼舱', holdKg: 160 },
+    ] },
+    fuel: { name: '油箱', levels: [
+        { cost: 0, label: '40 升油箱', fuelL: 40 },
+        { cost: 150, label: '80 升油箱', fuelL: 80 },
+        { cost: 380, label: '150 升油箱', fuelL: 150 },
+    ] },
+    engine: { name: '引擎', levels: [
+        { cost: 0, label: '老旧柴油机', speedMul: 1 },
+        { cost: 300, label: '翻新柴油机', speedMul: 1.15 },
+        { cost: 700, label: '涡轮柴油机', speedMul: 1.3 },
+    ] },
+    fishFinder: { name: '探鱼器', levels: [
+        { cost: 0, label: '无', finder: false },
+        { cost: 250, label: '探鱼器（HUD 显示深度和鱼）', finder: true },
+    ] },
+    lights: { name: '船只灯光', levels: [
+        { cost: 0, label: '仅导航灯', deckLights: false },
+        { cost: 140, label: '甲板泛光灯（夜间钓鱼）', deckLights: true },
+    ] },
 };
 
 export const FUEL_PRICE = 1.5; // $ per litre of diesel at the chandlery
