@@ -86,10 +86,10 @@ export class AppUI {
 		};
 
 		// ---------------------------------------------------------------- Ocean
-		const ocean = ui.addTab( 'ocean', 'Ocean', 'ocean' );
-		const sea = ocean.addFolder( 'Sea state', { icon: 'wind' } );
+		const ocean = ui.addTab( 'ocean', '海洋', 'ocean' );
+		const sea = ocean.addFolder( '海况', { icon: 'wind' } );
 		sea.addPresets( {
-			label: 'Conditions', active: 'Breezy',
+			label: '条件', active: 'Breezy',
 			presets: Object.keys( SEA ).map( ( k ) => ( {
 				label: k, icon: k.toLowerCase(),
 				apply: () => {
@@ -105,27 +105,27 @@ export class AppUI {
 				},
 			} ) ),
 		} );
-		sea.addSlider( { label: 'Wind speed', object: s, key: 'wind', min: 0.5, max: 30, step: 0.1, unit: 'm/s', tooltip: 'Wind 10 m above the sea. Drives the local wind waves, whitecaps and spray.', onChange: () => {
+		sea.addSlider( { label: '风速', object: s, key: 'wind', min: 0.5, max: 30, step: 0.1, unit: 'm/s', tooltip: 'Wind 10 m above the sea. Drives the local wind waves, whitecaps and spray.', onChange: () => {
 
 			spectrum();
 			whitecaps();
 
 		} } );
-		sea.addSlider( { label: 'Wind direction', object: s, key: 'windDir', min: 0, max: 360, step: 1, unit: '°', onChange: spectrum } );
-		sea.addSlider( { label: 'Fetch', object: s, key: 'fetch', min: 5, max: 2000, log: true, unit: 'km', tooltip: 'Distance the wind has blown over open water: longer fetch, longer and higher waves.', onChange: spectrum } );
-		sea.addSlider( { label: 'Choppiness', object: s, key: 'chop', min: 0, max: 1.6, step: 0.01, tooltip: 'Horizontal displacement: sharp crests, wide troughs.', onChange: ( v ) => { fft.choppiness.value = v; } } );
-		sea.addSlider( { label: 'Ocean swell', object: s, key: 'swell', min: 0, max: 2, step: 0.01, onChange: spectrum } );
-		sea.addSlider( { label: 'Whitecaps', object: s, key: 'whitecaps', min: 0, max: 1, step: 0.01, onChange: whitecaps } );
-		const water = ocean.addFolder( 'Water', { icon: 'droplet' } );
-		water.addSlider( { label: 'Clarity', object: s, key: 'clarity', min: 0.3, max: 2, step: 0.01, tooltip: 'Lower = more suspended sediment and plankton (greener, murkier).', onChange: clarity } );
+		sea.addSlider( { label: '风向', object: s, key: 'windDir', min: 0, max: 360, step: 1, unit: '°', onChange: spectrum } );
+		sea.addSlider( { label: '风区', object: s, key: 'fetch', min: 5, max: 2000, log: true, unit: 'km', tooltip: 'Distance the wind has blown over open water: longer fetch, longer and higher waves.', onChange: spectrum } );
+		sea.addSlider( { label: '浪尖度', object: s, key: 'chop', min: 0, max: 1.6, step: 0.01, tooltip: 'Horizontal displacement: sharp crests, wide troughs.', onChange: ( v ) => { fft.choppiness.value = v; } } );
+		sea.addSlider( { label: '浪涌', object: s, key: 'swell', min: 0, max: 2, step: 0.01, onChange: spectrum } );
+		sea.addSlider( { label: '白浪', object: s, key: 'whitecaps', min: 0, max: 1, step: 0.01, onChange: whitecaps } );
+		const water = ocean.addFolder( '水体', { icon: 'droplet' } );
+		water.addSlider( { label: '清澈度', object: s, key: 'clarity', min: 0.3, max: 2, step: 0.01, tooltip: 'Lower = more suspended sediment and plankton (greener, murkier).', onChange: clarity } );
 
 		// ---------------------------------------------------------------- Shore
-		const shoreTab = ui.addTab( 'shore', 'Shore', 'shore' );
-		const surf = shoreTab.addFolder( 'Surf', { icon: 'wave' } );
-		surf.addSlider( { label: 'Wave height', object: s, key: 'surf', min: 0, max: 1.4, step: 0.01, unit: 'm', format: ( v ) => `${ ( v * 2 ).toFixed( 2 ) } m`, onChange: ( v ) => { shore.amplitude.value = v; } } );
-		surf.addSlider( { label: 'Wave period', object: s, key: 'period', min: 5, max: 16, step: 0.1, unit: 's', onChange: ( v ) => { shore.period.value = v; } } );
-		surf.addSlider( { label: 'Breaking depth ratio', object: s, key: 'gamma', min: 0.5, max: 1.1, step: 0.01, tooltip: 'Waves break when height exceeds this fraction of the depth.', onChange: ( v ) => { shore.gamma.value = v; } } );
-		surf.addSlider( { label: 'Curl', object: s, key: 'curl', min: 0, max: 1.5, step: 0.01, onChange: ( v ) => { shore.curl.value = v; } } );
+		const shoreTab = ui.addTab( 'shore', '岸边', 'shore' );
+		const surf = shoreTab.addFolder( '浪涌', { icon: 'wave' } );
+		surf.addSlider( { label: '浪高', object: s, key: 'surf', min: 0, max: 1.4, step: 0.01, unit: 'm', format: ( v ) => `${ ( v * 2 ).toFixed( 2 ) } m`, onChange: ( v ) => { shore.amplitude.value = v; } } );
+		surf.addSlider( { label: '周期', object: s, key: 'period', min: 5, max: 16, step: 0.1, unit: 's', onChange: ( v ) => { shore.period.value = v; } } );
+		surf.addSlider( { label: '破碎深度比', object: s, key: 'gamma', min: 0.5, max: 1.1, step: 0.01, tooltip: 'Waves break when height exceeds this fraction of the depth.', onChange: ( v ) => { shore.gamma.value = v; } } );
+		surf.addSlider( { label: '卷曲', object: s, key: 'curl', min: 0, max: 1.5, step: 0.01, onChange: ( v ) => { shore.curl.value = v; } } );
 		if ( app.breakers ) {
 
 			s.spray = app.breakers.params.spray.value;
@@ -152,73 +152,73 @@ export class AppUI {
 		}
 
 		// ---------------------------------------------------------------- Sky
-		const sky = ui.addTab( 'sky', 'Sky', 'sky' );
-		const sun = sky.addFolder( 'Sun', { icon: 'clock' } );
+		const sky = ui.addTab( 'sky', '天空', 'sky' );
+		const sun = sky.addFolder( '太阳', { icon: 'clock' } );
 		sun.addTimeOfDay( { object: app.settings, key: 'timeOfDay' } );
-		sun.addSlider( { label: 'Sun azimuth', object: app.settings, key: 'sunAzimuth', min: - 180, max: 180, step: 1, format: ( v ) => `${ Math.round( v ) }°`, tooltip: 'Turns the sun\'s path around the island (0 = the real path: rises in the east, sets in the west).' } );
+		sun.addSlider( { label: '太阳方位', object: app.settings, key: 'sunAzimuth', min: - 180, max: 180, step: 1, format: ( v ) => `${ Math.round( v ) }°`, tooltip: 'Turns the sun\'s path around the island (0 = the real path: rises in the east, sets in the west).' } );
 		let speed = null;
-		sun.addToggle( { label: 'Advance time', object: s, key: 'advance', onChange: ( v ) => {
+		sun.addToggle( { label: '推进时间', object: s, key: 'advance', onChange: ( v ) => {
 
 			app.settings.timeSpeed = v ? s.timeSpeed : 0;
 			speed.setVisible( v );
 
 		} } );
-		speed = sun.addSlider( { label: 'Time speed', object: s, key: 'timeSpeed', min: 0.002, max: 1, log: true, unit: 'h/s', onChange: ( v ) => { if ( s.advance ) app.settings.timeSpeed = v; } } ).setVisible( s.advance );
-		const atmo = sky.addFolder( 'Atmosphere', { icon: 'cloud' } );
-		if ( app.clouds ) atmo.addSlider( { label: 'Cloud cover', object: s, key: 'clouds', min: 0, max: 1, step: 0.01, format: ( v ) => `${ Math.round( v * 100 ) }%`, onChange: ( v ) => { app.clouds.coverage.value = v; } } );
-		if ( app.clouds && app.clouds.cirrus ) atmo.addSlider( { label: 'Cirrus', object: s, key: 'cirrus', min: 0, max: 1, step: 0.01, format: ( v ) => `${ Math.round( v * 100 ) }%`, onChange: ( v ) => { app.clouds.cirrus.value = v; } } );
+		speed = sun.addSlider( { label: '时间速度', object: s, key: 'timeSpeed', min: 0.002, max: 1, log: true, unit: 'h/s', onChange: ( v ) => { if ( s.advance ) app.settings.timeSpeed = v; } } ).setVisible( s.advance );
+		const atmo = sky.addFolder( '大气', { icon: 'cloud' } );
+		if ( app.clouds ) atmo.addSlider( { label: '云量', object: s, key: 'clouds', min: 0, max: 1, step: 0.01, format: ( v ) => `${ Math.round( v * 100 ) }%`, onChange: ( v ) => { app.clouds.coverage.value = v; } } );
+		if ( app.clouds && app.clouds.cirrus ) atmo.addSlider( { label: '卷云', object: s, key: 'cirrus', min: 0, max: 1, step: 0.01, format: ( v ) => `${ Math.round( v * 100 ) }%`, onChange: ( v ) => { app.clouds.cirrus.value = v; } } );
 		if ( app.haze ) {
 
 			s.haze = app.haze.density.value;
 			s.shafts = app.haze.shafts.value;
-			atmo.addSlider( { label: 'Haze', object: s, key: 'haze', min: 0, max: 4, step: 0.05, tooltip: 'Aerial perspective and marine haze density (1 = about 20 km visibility at sea level, 0 = clear air).', onChange: ( v ) => { app.haze.density.value = v; } } );
-			atmo.addSlider( { label: 'Sun shafts', object: s, key: 'shafts', min: 0, max: 3, step: 0.05, tooltip: 'Volumetric light shafts and crepuscular rays in the haze (shadows of palms, the pier, hills and clouds). 0 turns them off.', onChange: ( v ) => { app.haze.shafts.value = v; } } );
+			atmo.addSlider( { label: '雾霾', object: s, key: 'haze', min: 0, max: 4, step: 0.05, tooltip: 'Aerial perspective and marine haze density (1 = about 20 km visibility at sea level, 0 = clear air).', onChange: ( v ) => { app.haze.density.value = v; } } );
+			atmo.addSlider( { label: '阳光束', object: s, key: 'shafts', min: 0, max: 3, step: 0.05, tooltip: 'Volumetric light shafts and crepuscular rays in the haze (shadows of palms, the pier, hills and clouds). 0 turns them off.', onChange: ( v ) => { app.haze.shafts.value = v; } } );
 
 		}
 		if ( app.airMotes ) {
 
 			s.air = app.airMotes.intensity.value;
-			atmo.addSlider( { label: 'Air particles', object: s, key: 'air', min: 0, max: 2, step: 0.01, tooltip: 'Dust, pollen, salt haze, seed fluff and the odd gnat drifting in the air: they catch the light when backlit by the sun. 0 turns them off.', onChange: ( v ) => { app.airMotes.intensity.value = v; } } );
+			atmo.addSlider( { label: '空气微粒', object: s, key: 'air', min: 0, max: 2, step: 0.01, tooltip: 'Dust, pollen, salt haze, seed fluff and the odd gnat drifting in the air: they catch the light when backlit by the sun. 0 turns them off.', onChange: ( v ) => { app.airMotes.intensity.value = v; } } );
 
 		}
 
-		atmo.addSlider( { label: 'Exposure', object: s, key: 'exposure', min: - 3, max: 3, step: 0.1, unit: 'EV', onChange: ( v ) => { app.settings.exposure = 0.55 * Math.pow( 2, v ); } } );
+		atmo.addSlider( { label: '曝光', object: s, key: 'exposure', min: - 3, max: 3, step: 0.1, unit: 'EV', onChange: ( v ) => { app.settings.exposure = 0.55 * Math.pow( 2, v ); } } );
 
 		// ---------------------------------------------------------------- Camera
-		const cam = ui.addTab( 'camera', 'Camera', 'camera' );
-		const view = cam.addFolder( 'View', { icon: 'camera' } );
-		view.addSelect( { label: 'Boat camera', object: s, key: 'camMode', options: [ { label: '1st person', value: 'first' }, { label: '3rd person', value: 'third' } ], onChange: ( v ) => { app.player.camMode = v; } } );
-		view.addSlider( { label: 'Field of view', object: s, key: 'fov', min: 35, max: 100, step: 1, unit: '°', onChange: ( v ) => {
+		const cam = ui.addTab( 'camera', '相机', 'camera' );
+		const view = cam.addFolder( '视角', { icon: 'camera' } );
+		view.addSelect( { label: '船只相机', object: s, key: 'camMode', options: [ { label: '1st person', value: 'first' }, { label: '3rd person', value: 'third' } ], onChange: ( v ) => { app.player.camMode = v; } } );
+		view.addSlider( { label: '视野', object: s, key: 'fov', min: 35, max: 100, step: 1, unit: '°', onChange: ( v ) => {
 
 			app.camera.fov = v;
 			app.camera.updateProjectionMatrix();
 
 		} } );
-		view.addButton( { label: 'Free camera (F)', icon: 'camera', onClick: () => app.setFreeCam( ! app.freeCam ) } );
+		view.addButton( { label: '自由视角 (F)', icon: 'camera', onClick: () => app.setFreeCam( ! app.freeCam ) } );
 
 		// ---------------------------------------------------------------- Effects
-		const fx = ui.addTab( 'effects', 'Effects', 'effects' );
-		const post = fx.addFolder( 'Post-processing', { icon: 'sparkles' } );
+		const fx = ui.addTab( 'effects', '特效', 'effects' );
+		const post = fx.addFolder( '后处理', { icon: 'sparkles' } );
 		const P = app.post.params;
-		post.addSlider( { label: 'Ambient occlusion', object: s, key: 'ao', min: 0, max: 1.5, step: 0.01, onChange: ( v ) => { P.aoStrength.value = v; } } );
+		post.addSlider( { label: '环境光遮蔽', object: s, key: 'ao', min: 0, max: 1.5, step: 0.01, onChange: ( v ) => { P.aoStrength.value = v; } } );
 		s.bounce = GroundBounce.strength.value;
-		post.addSlider( { label: 'Bounce light', object: s, key: 'bounce', min: 0, max: 2, step: 0.01, tooltip: 'Sunlight reflected off the ground (bright sand) onto undersides and shaded faces: pier, eaves, hulls, trunks. 0 = off.', onChange: ( v ) => { GroundBounce.strength.value = v; } } );
+		post.addSlider( { label: '反弹光', object: s, key: 'bounce', min: 0, max: 2, step: 0.01, tooltip: 'Sunlight reflected off the ground (bright sand) onto undersides and shaded faces: pier, eaves, hulls, trunks. 0 = off.', onChange: ( v ) => { GroundBounce.strength.value = v; } } );
 		s.sharpen = P.sharpen.value;
-		post.addSlider( { label: 'Sharpen', object: s, key: 'sharpen', min: 0, max: 1, step: 0.01, tooltip: 'Contrast-adaptive sharpening after the temporal anti-aliasing.', onChange: ( v ) => { P.sharpen.value = v; } } );
+		post.addSlider( { label: '锐化', object: s, key: 'sharpen', min: 0, max: 1, step: 0.01, tooltip: 'Contrast-adaptive sharpening after the temporal anti-aliasing.', onChange: ( v ) => { P.sharpen.value = v; } } );
 		if ( app.post.motionBlur ) {
 
 			const mb = app.post.motionBlur.shutter;
 			s.motionBlur = mb.value;
-			post.addSlider( { label: 'Motion blur', object: s, key: 'motionBlur', min: 0, max: 1, step: 0.05, format: ( v ) => v > 0 ? `${ Math.round( v * 360 ) }°` : 'Off', tooltip: 'Camera and object motion blur, as a shutter angle (180° = film look). 0 turns it off.', onChange: ( v ) => { mb.value = v; } } );
+			post.addSlider( { label: '运动模糊', object: s, key: 'motionBlur', min: 0, max: 1, step: 0.05, format: ( v ) => v > 0 ? `${ Math.round( v * 360 ) }°` : 'Off', tooltip: 'Camera and object motion blur, as a shutter angle (180° = film look). 0 turns it off.', onChange: ( v ) => { mb.value = v; } } );
 
 		}
 
-		post.addSlider( { label: 'Bloom', object: s, key: 'bloom', min: 0, max: 0.3, step: 0.005, onChange: ( v ) => { P.bloom.value = v; } } );
-		if ( app.post.flare ) post.addSlider( { label: 'Lens flare', object: s, key: 'flare', min: 0, max: 2, step: 0.05, onChange: ( v ) => { app.post.flare.strength.value = v; } } );
-		post.addSlider( { label: 'Saturation', object: s, key: 'saturation', min: 0.5, max: 1.5, step: 0.01, onChange: ( v ) => { P.saturation.value = v; } } );
-		post.addSlider( { label: 'Contrast', object: s, key: 'contrast', min: 0.8, max: 1.3, step: 0.01, onChange: ( v ) => { P.contrast.value = v; } } );
-		post.addSlider( { label: 'Vignette', object: s, key: 'vignette', min: 0, max: 1, step: 0.01, onChange: ( v ) => { P.vignette.value = v; } } );
-		post.addSlider( { label: 'Film grain', object: s, key: 'grain', min: 0, max: 0.06, step: 0.001, onChange: ( v ) => { P.grain.value = v; } } );
+		post.addSlider( { label: '泛光', object: s, key: 'bloom', min: 0, max: 0.3, step: 0.005, onChange: ( v ) => { P.bloom.value = v; } } );
+		if ( app.post.flare ) post.addSlider( { label: '镜头光晕', object: s, key: 'flare', min: 0, max: 2, step: 0.05, onChange: ( v ) => { app.post.flare.strength.value = v; } } );
+		post.addSlider( { label: 'Saturation', object: s, key: '饱和度', min: 0.5, max: 1.5, step: 0.01, onChange: ( v ) => { P.saturation.value = v; } } );
+		post.addSlider( { label: 'Contrast', object: s, key: '对比度', min: 0.8, max: 1.3, step: 0.01, onChange: ( v ) => { P.contrast.value = v; } } );
+		post.addSlider( { label: 'Vignette', object: s, key: '暗角', min: 0, max: 1, step: 0.01, onChange: ( v ) => { P.vignette.value = v; } } );
+		post.addSlider( { label: 'Film grain', object: s, key: '胶片颗粒', min: 0, max: 0.06, step: 0.001, onChange: ( v ) => { P.grain.value = v; } } );
 
 		// ---------------------------------------------------------------- Performance
 		const perf = ui.addTab( 'performance', 'Performance', 'performance' );
