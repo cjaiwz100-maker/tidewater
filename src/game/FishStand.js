@@ -47,18 +47,18 @@ export class FishStand {
 		// the buyer stands behind the counter (local -Z), facing out (+Z)
 		// (local z 0.12: clear of the shelf at -0.78..-0.48 and the counter top from 0.58)
 		const local = new Vector3( 0.2, 0, 0.12 ).applyAxisAngle( new Vector3( 0, 1, 0 ), STAND.yaw );
-		this.vendor = new Vendor( {
-			name: 'Joe · Fish buyer',
-			kind: 'buyer',
-			position: new Vector3( STAND.x + local.x, y + STALL_FLOOR, STAND.z + local.z ),
-			yaw: STAND.yaw,
-			radius: 3.2,
-			greeting: 'Let\'s see what you caught. Fair prices, cash.',
-			idle: 'Nothing to sell? The grunts are biting off the pier.',
-			material: this.material,
-			// realistic character (Rocketbox, MIT): the stand-in shows until it has loaded
-			character: { url: ( ( import.meta.env && import.meta.env.BASE_URL ) || '/' ) + 'models/characters/joe.glb', idle: 'idle_neutral_01', talk: 'gestic_talk_relaxed_01', greet: 'wave_01' },
-		} );
+this.vendor = new Vendor( {
+    name: '乔 · 鱼贩',
+    kind: 'buyer',
+    position: new Vector3( STAND.x + local.x, y + STALL_FLOOR, STAND.z + local.z ),
+    yaw: STAND.yaw,
+    radius: 3.2,
+    greeting: '让我看看你钓到了什么。价格公道，现金交易。',
+    idle: '没什么可卖的？码头边的石鲈正在咬钩。',
+    material: this.material,
+    // realistic character (Rocketbox, MIT): the stand-in shows until it has loaded
+    character: { url: ( ( import.meta.env && import.meta.env.BASE_URL ) || '/' ) + 'models/characters/joe.glb', idle: 'idle_neutral_01', talk: 'gestic_talk_relaxed_01', greet: 'wave_01' },
+} );
 		scene.add( this.vendor.group );
 
 		// the stall is solid (counter front and the side walls)
