@@ -290,24 +290,24 @@ export class Game {
 
 			// by the water (boat deck, pier, the wet beach, wading): suggest the rod
 			const byWater = p.mode === 'deck' || ( p.mode === 'walk' && [ 'wood', 'wetsand', 'water' ].includes( p.surface ) );
-			return byWater ? { key: 'R', text: 'Take out the rod' } : null;
+return byWater ? { key: 'R', text: '取出鱼竿' } : null;
 
 		}
 
 		const b = this.bite;
 		switch ( rod.state ) {
 
-			case 'idle': return { key: 'LMB', text: 'Hold to wind up, release to cast   ·   R  put the rod away' };
-			case 'windup': return { key: 'LMB', text: 'Release to cast (hold longer to cast farther)' };
+case 'idle': return { key: 'LMB', text: '按住蓄力，松开抛竿 · R 收起鱼竿' };
+case 'windup': return { key: 'LMB', text: '松开抛竿（按得越久抛得越远）' };
 			case 'flying': return null;
 			case 'floating':
-				if ( b && b.phase === 'take' ) return { key: 'LMB', text: 'Strike now!' };
-				if ( b && b.phase === 'nibble' ) return { key: '…', text: 'Something\'s nibbling · wait until the bobber is pulled under' };
-				return { key: 'RMB', text: 'Waiting for a bite · right-click to reel the line in' };
-			case 'retrieving': return { key: 'RMB', text: 'Reeling in' };
+if ( b && b.phase === 'take' ) return { key: 'LMB', text: '立即上钩！' };
+if ( b && b.phase === 'nibble' ) return { key: '…', text: '有东西在试探 · 等浮漂被拉下水' };
+return { key: 'RMB', text: '等待咬钩 · 右键收线' };
+case 'retrieving': return { key: 'RMB', text: '正在收线' };
 			case 'fighting': return this.fight && this.fight.tension > this.fight.band[ 1 ]
-				? { key: 'LMB', text: 'Too much tension · let go!' }
-				: { key: 'LMB', text: 'Hold to reel · let go when the tension goes red' };
+? { key: 'LMB', text: '张力过大 · 松开！' }
+: { key: 'LMB', text: '按住收线 · 张力变红时松开' };
 			case 'landing': return null;
 			default: return null;
 
