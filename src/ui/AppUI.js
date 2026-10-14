@@ -221,16 +221,16 @@ export class AppUI {
 		post.addSlider( { label: 'Film grain', object: s, key: '胶片颗粒', min: 0, max: 0.06, step: 0.001, onChange: ( v ) => { P.grain.value = v; } } );
 
 		// ---------------------------------------------------------------- Performance
-		const perf = ui.addTab( 'performance', 'Performance', 'performance' );
-		const live = perf.addFolder( 'Live', { icon: 'gauge' } );
-		live.addInfo( { label: 'Frame rate', get: () => `${ ( app.fps || 0 ).toFixed( 0 ) } fps` } );
-		live.addInfo( { label: 'CPU per frame', get: () => `${ ( app.cpuMs || 0 ).toFixed( 2 ) } ms` } );
-		live.addInfo( { label: 'Render size', get: () => `${ app.sceneRenderer.width } × ${ app.sceneRenderer.height }` } );
-		const quality = perf.addFolder( 'Quality', { icon: 'layers' } );
-		quality.addSlider( { label: 'Render scale', object: s, key: 'renderScale', min: 0.5, max: 1, step: 0.05, format: ( v ) => `${ Math.round( v * 100 ) }%`, tooltip: 'Internal resolution; the temporal upscaler reconstructs the full output resolution.', onChange: ( v ) => app.setRenderScale( v ) } );
+		const perf = ui.addTab( 'performance', '性能', 'performance' );
+		const live = perf.addFolder( '实时', { icon: 'gauge' } );
+		live.addInfo( { label: '帧率', get: () => `${ ( app.fps || 0 ).toFixed( 0 ) } fps` } );
+		live.addInfo( { label: '每帧 CPU', get: () => `${ ( app.cpuMs || 0 ).toFixed( 2 ) } ms` } );
+		live.addInfo( { label: '渲染尺寸', get: () => `${ app.sceneRenderer.width } × ${ app.sceneRenderer.height }` } );
+		const quality = perf.addFolder( '画质', { icon: 'layers' } );
+		quality.addSlider( { label: '渲染比例', object: s, key: 'renderScale', min: 0.5, max: 1, step: 0.05, format: ( v ) => `${ Math.round( v * 100 ) }%`, tooltip: 'Internal resolution; the temporal upscaler reconstructs the full output resolution.', onChange: ( v ) => app.setRenderScale( v ) } );
 		// anti-aliasing: the TAA with 2..16 jitter positions averaged per pixel, or none
 		s.aa = app.post.aaMode === 'none' ? 0 : app.post.taau.jitterPhaseOverride;
-		quality.addSelect( { label: 'Anti-aliasing', object: s, key: 'aa', tooltip: 'Temporal anti-aliasing: each pixel averages this many sub-pixel sample positions over successive frames (it also smooths dithered fades and shadow noise). More samples cost nothing per frame but take a few more frames to settle.', options: [ { label: 'Off', value: 0 }, { label: '2x', value: 2 }, { label: '4x', value: 4 }, { label: '8x', value: 8 }, { label: '16x', value: 16 } ], onChange: ( v ) => {
+		quality.addSelect( { label: '抗锯齿', object: s, key: 'aa', tooltip: 'Temporal anti-aliasing: each pixel averages this many sub-pixel sample positions over successive frames (it also smooths dithered fades and shadow noise). More samples cost nothing per frame but take a few more frames to settle.', options: [ { label: 'Off', value: 0 }, { label: '2x', value: 2 }, { label: '4x', value: 4 }, { label: '8x', value: 8 }, { label: '16x', value: 16 } ], onChange: ( v ) => {
 
 			const n = Number( v );
 			app.post.aaMode = n > 0 ? 'taa' : 'none';
