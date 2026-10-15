@@ -130,24 +130,24 @@ presets: Object.keys( SEA ).map( ( k ) => ( {
 
 			s.spray = app.breakers.params.spray.value;
 			s.lip = app.breakers.params.sheet.value;
-			surf.addSlider( { label: 'Spray', object: s, key: 'spray', min: 0, max: 2, step: 0.01, tooltip: 'Droplets and mist thrown off breaking crests.', onChange: ( v ) => { app.breakers.params.spray.value = v; } } );
-			surf.addSlider( { label: 'Lip sheet', object: s, key: 'lip', min: 0, max: 1.5, step: 0.01, tooltip: 'The thin sheet of water thrown forward by plunging breakers.', onChange: ( v ) => { app.breakers.params.sheet.value = v; } } );
+			surf.addSlider( { label: '浪花', object: s, key: 'spray', min: 0, max: 2, step: 0.01, tooltip: 'Droplets and mist thrown off breaking crests.', onChange: ( v ) => { app.breakers.params.spray.value = v; } } );
+			surf.addSlider( { label: '唇浪', object: s, key: 'lip', min: 0, max: 1.5, step: 0.01, tooltip: 'The thin sheet of water thrown forward by plunging breakers.', onChange: ( v ) => { app.breakers.params.sheet.value = v; } } );
 
 		}
 
 		if ( app.wake ) {
 
-			const boat = shoreTab.addFolder( 'Boat wake', { icon: 'wave', open: false } );
+			const boat = shoreTab.addFolder( '船尾浪', { icon: 'wave', open: false } );
 			s.wakeHeight = app.wake.amplitude.value;
 			s.wakeFoam = app.wake.foamGain.value;
-			boat.addSlider( { label: 'Wake height', object: s, key: 'wakeHeight', min: 0, max: 2, step: 0.01, onChange: ( v ) => { app.wake.amplitude.value = v; } } );
-			boat.addSlider( { label: 'Wake foam', object: s, key: 'wakeFoam', min: 0, max: 1.5, step: 0.01, onChange: ( v ) => { app.wake.foamGain.value = v; } } );
+			boat.addSlider( { label: '尾浪高度', object: s, key: 'wakeHeight', min: 0, max: 2, step: 0.01, onChange: ( v ) => { app.wake.amplitude.value = v; } } );
+			boat.addSlider( { label: '尾浪泡沫', object: s, key: 'wakeFoam', min: 0, max: 1.5, step: 0.01, onChange: ( v ) => { app.wake.foamGain.value = v; } } );
 
 		}
 		if ( app.caustics ) {
 
-			const light = shoreTab.addFolder( 'Caustics', { icon: 'sun', open: false } );
-			light.addSlider( { label: 'Intensity', object: s, key: 'caustics', min: 0, max: 2, step: 0.01, onChange: ( v ) => { app.caustics.strength.value = v; } } );
+			const light = shoreTab.addFolder( '焦散', { icon: 'sun', open: false } );
+			light.addSlider( { label: '强度', object: s, key: 'caustics', min: 0, max: 2, step: 0.01, onChange: ( v ) => { app.caustics.strength.value = v; } } );
 
 		}
 
