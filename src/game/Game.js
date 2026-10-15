@@ -159,7 +159,7 @@ export class Game {
 
 			rod.equip( ! rod.equipped );
 			if ( ! rod.equipped ) this.cancelLine();
-			this.toast( rod.equipped ? 'Rod out · hold left mouse to cast' : 'Rod away', 1600 );
+this.toast( rod.equipped ? '鱼竿已取出 · 按住左键蓄力抛竿' : '鱼竿已收起', 1600 );
 
 		}
 
