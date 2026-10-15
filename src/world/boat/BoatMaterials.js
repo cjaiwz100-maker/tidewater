@@ -350,16 +350,13 @@ let aa = fwidth( abs( uv.x ) + abs( uv.y ) ) * 1.2;
 let outer = 1.0 - smoothstep( 0.8 - aa, 0.8 + aa, abs( uv.x ) + abs( uv.y ) );
 let sideGap = step( 0.32, abs( uv.x ) ) * step( abs( uv.y ), 0.28 );
 let frame = outer * ( 1.0 - sideGap );
-
 // center diamond
 let center = 1.0 - smoothstep( 0.18 - aa, 0.18 + aa, abs( uv.x ) + abs( uv.y ) );
-
-// Left / right small diamonds
+// left / right small diamonds
 let left = 1.0 - smoothstep( 0.11 - aa, 0.11 + aa, abs( uv.x + 0.52 ) + abs( uv.y ) );
 let right = 1.0 - smoothstep( 0.11 - aa, 0.11 + aa, abs( uv.x - 0.52 ) + abs( uv.y ) );
-
-let shape = max( max(frame, center), max(left, right) );
-let flag = mix( col(0xffffff), col(0xf3ba2f), sat( shape ) );
+let shape = max( frame + center, max( left, right ) );
+let flag = mix( ${ col( 0xffffff ) }, ${ col( 0xf3ba2f ) }, sat( shape ) );
 
 
 	var c = mix( vColor, vColor * ropeShade, boatIsPattern( aux.z, 1.0 ) );
