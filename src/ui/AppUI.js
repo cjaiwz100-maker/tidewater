@@ -237,9 +237,9 @@ presets: Object.keys( SEA ).map( ( k ) => ( {
 			if ( n > 0 ) app.post.taau.jitterPhaseOverride = n;
 
 		} } );
-		quality.addToggle( { label: 'Shadows', object: s, key: 'shadows', onChange: ( v ) => { app.shadows.enabled = v; } } );
+		quality.addToggle( { label: '阴影', object: s, key: 'shadows', onChange: ( v ) => { app.shadows.enabled = v; } } );
 		s.ssr = true;
-		quality.addToggle( { label: 'Water reflections', object: s, key: 'ssr', tooltip: 'Screen-space reflections of the pier, boats and hills on the water.', onChange: ( v ) => { app.waterMaterial.params.ssr.value = v ? 1 : 0; } } );
+		quality.addToggle( { label: '水面反射', object: s, key: 'ssr', tooltip: 'Screen-space reflections of the pier, boats and hills on the water.', onChange: ( v ) => { app.waterMaterial.params.ssr.value = v ? 1 : 0; } } );
 
 		this._t = 0;
 
