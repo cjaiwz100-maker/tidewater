@@ -345,15 +345,13 @@ export class BoatMaterials {
 
 // 五星红旗
 let flag = ${ col( 0xde2910 ) };
-// 大五角星
 let big = boatInvstep( 0.08, 0.12, length( u - vec2f( 0.18, 0.82 ) ) );
-// 四颗小五角星（简化为圆点）
 let s1 = boatInvstep( 0.03, 0.05, length( u - vec2f( 0.32, 0.9 ) ) );
 let s2 = boatInvstep( 0.03, 0.05, length( u - vec2f( 0.38, 0.78 ) ) );
 let s3 = boatInvstep( 0.03, 0.05, length( u - vec2f( 0.32, 0.66 ) ) );
 let s4 = boatInvstep( 0.03, 0.05, length( u - vec2f( 0.22, 0.72 ) ) );
 let stars = max( max( max( big, s1 ), max( s2, s3 ) ), s4 );
-let flag = mix( flag, ${ col( 0xffde00 ) }, stars );
+flag = mix( flag, ${ col( 0xffde00 ) }, stars );
 
 	var c = mix( vColor, vColor * ropeShade, boatIsPattern( aux.z, 1.0 ) );
 	c = mix( c, flag, boatIsPattern( aux.z, 2.0 ) );
