@@ -343,18 +343,19 @@ export class BoatMaterials {
 	let strand = sin( ( u.x / 0.07 + u.y ) * ( TWO_PI * 3.0 ) );
 	let ropeShade = boatLstep( -0.7, 0.7, strand ) * 0.4 + 0.6;
 
-// Binance logo
-let uv = ( u - 0.5 ) * 1.7;
+// Binance logo: broken outer diamond + side diamonds
+let uv = ( u - 0.5 ) * 1.5;
 let aa = fwidth( abs( uv.x ) + abs( uv.y ) );
-// outer frame
-let outer = 1.0 - smoothstep( 0.82 - aa, 0.82 + aa, abs( uv.x ) + abs( uv.y ) );
-let cut = 1.0 - smoothstep( 0.5 - aa, 0.5 + aa, abs( uv.x ) + abs( uv.y ) );
+// outer diamond with side gaps
+let outer = 1.0 - smoothstep( 0.75 - aa, 0.75 + aa, abs( uv.x ) + abs( uv.y ) );
+let gap = step( 0.35, abs( uv.x ) ) * step( abs( uv.y ), 0.25 );
+let outerBroken = outer * ( 1.0 - gap );
 // center diamond
 let center = 1.0 - smoothstep( 0.2 - aa, 0.2 + aa, abs( uv.x ) + abs( uv.y ) );
-// left / right
-let left = 1.0 - smoothstep( 0.13 - aa, 0.13 + aa, abs( uv.x + 0.6 ) + abs( uv.y ) );
-let right = 1.0 - smoothstep( 0.13 - aa, 0.13 + aa, abs( uv.x - 0.6 ) + abs( uv.y ) );
-let shape = max( max( outer - cut * 0.75 + center, left ), right );
+// left / right small diamonds in the gaps
+let left = 1.0 - smoothstep( 0.11 - aa, 0.11 + aa, abs( uv.x + 0.5 ) + abs( uv.y ) );
+let right = 1.0 - smoothstep( 0.11 - aa, 0.11 + aa, abs( uv.x - 0.5 ) + abs( uv.y ) );
+let shape = max( outerBroken + center * 0.8, max( left, right ) );
 let flag = mix( ${ col( 0xffffff ) }, ${ col( 0xf3ba2f ) }, sat( shape ) );
 
 	var c = mix( vColor, vColor * ropeShade, boatIsPattern( aux.z, 1.0 ) );
