@@ -90,8 +90,8 @@ export class AppUI {
 		const sea = ocean.addFolder( '海况', { icon: 'wind' } );
 		sea.addPresets( {
 			label: '条件', active: 'Breezy',
-			presets: Object.keys( SEA ).map( ( k ) => ( {
-				label: k, icon: k.toLowerCase(),
+presets: Object.keys( SEA ).map( ( k ) => ( {
+    label: { Calm: '平静', Breezy: '微风', Choppy: '颠簸', Storm: '风暴' }[ k ] || k, icon: k.toLowerCase(),
 				apply: () => {
 
 					const p = SEA[ k ];
