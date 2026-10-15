@@ -2134,7 +2134,7 @@ foot.innerHTML = '<span><kbd>H</kbd>隐藏</span><span><kbd>F1</kbd>控制</span
 <h2 id="tw-help-title">控制</h2>
 <p>点击画面捕捉鼠标。Esc 释放。</p>
 					</div>
-<button ... aria-label="关闭" data-tip="关闭 (F1)">
+<button type="button" class="tw-icon-btn tw-help-close" aria-label="关闭" data-tip="关闭 (F1)">${ icon( 'close' ) }</button>
 				</header>
 				<div class="tw-help-grid">
 					<section>
@@ -2168,7 +2168,7 @@ ${ row( k( 'Esc' ), '释放鼠标' ) }
 				</div>
 				<div class="tw-help-guide">
 <span><b>玩法：</b>钓鱼，卖给码头边鱼摊的乔，到船屋边的玛塔商店买升级。两者都在右下角地图上。</span>
-<button ...>重新播放指南</button>
+<button type="button" class="gm-btn is-ghost tw-help-replay">重新播放指南</button>
 				</div>
 			</div>`;
 		el.querySelector( '.tw-help-close' ).addEventListener( 'click', () => this.toggleHelp( false ) );
