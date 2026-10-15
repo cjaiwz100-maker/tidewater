@@ -154,7 +154,7 @@ presets: Object.keys( SEA ).map( ( k ) => ( {
 		// ---------------------------------------------------------------- Sky
 		const sky = ui.addTab( 'sky', '天空', 'sky' );
 		const sun = sky.addFolder( '太阳', { icon: 'clock' } );
-		sun.addTimeOfDay( { object: app.settings, key: 'timeOfDay' } );
+		sun.addTimeOfDay( { object: app.settings, key: '时间' } );
 		sun.addSlider( { label: '太阳方位', object: app.settings, key: 'sunAzimuth', min: - 180, max: 180, step: 1, format: ( v ) => `${ Math.round( v ) }°`, tooltip: 'Turns the sun\'s path around the island (0 = the real path: rises in the east, sets in the west).' } );
 		let speed = null;
 		sun.addToggle( { label: '推进时间', object: s, key: 'advance', onChange: ( v ) => {
