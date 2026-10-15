@@ -160,7 +160,7 @@ export class Player {
 		// (not with a line out or a fish in hand: E belongs to the fishing then)
 		if ( this.nearBoat() && ! this.busy ) {
 
-			this.prompt = { key: 'E', text: 'Board boat' };
+			this.prompt = { key: 'E', text: '上船' };
 			if ( inp.hit( 'KeyE' ) ) {
 
 				this.boardBoat();
@@ -679,7 +679,7 @@ export class Player {
 
 		if ( nearHelm ) {
 
-			this.prompt = { key: 'E', text: 'Take the helm' };
+			this.prompt = { key: 'E', text: '驾驶' };
 			if ( inp.hit( 'KeyE' ) ) {
 
 				this.takeHelm();
@@ -694,7 +694,7 @@ export class Player {
 			const atRail = b.model.exitPoints.some( ( e ) => Math.hypot( p.x - e.x, p.z - e.z ) < 1.3 );
 			if ( ep && Math.hypot( p.x - ep.x, p.z - ep.z ) < 1.3 ) {
 
-				this.prompt = { key: 'E', text: 'Step ashore' };
+				this.prompt = { key: 'E', text: '上岸' };
 				if ( inp.hit( 'KeyE' ) ) {
 
 					this.exitBoat( this._ashore );
@@ -704,7 +704,7 @@ export class Player {
 
 			} else if ( atRail ) {
 
-				this.prompt = { key: 'E', text: 'Jump overboard' };
+				this.prompt = { key: 'E', text: '跳下船' };
 				if ( inp.hit( 'KeyE' ) ) {
 
 					this.exitBoat( null, Math.sign( p.x ) || 1 );
