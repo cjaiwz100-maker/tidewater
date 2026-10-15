@@ -421,7 +421,7 @@ if ( ! p.prompt ) p.prompt = { key: 'E', text: hud && hud.standOpen ? '离开' :
 
 		if ( where !== 'water' ) {
 
-			this.toast( 'Landed on the sand', 1400 );
+			this.toast( '落在沙滩上', 1400 );
 			return;
 
 		}
