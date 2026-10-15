@@ -2111,7 +2111,7 @@ foot.innerHTML = '<span><kbd>H</kbd>隐藏</span><span><kbd>F1</kbd>控制</span
 		const open = h( 'button', 'tw-rail-btn tw-rail-open', { type: 'button', 'aria-label': '打开设置', 'data-tip': '设置 (H)', 'data-tip-side': 'left', html: icon( 'sliders' ) } );
 		open.addEventListener( 'click', () => this.togglePanel( true ) );
 		this.railTabs = h( 'div', 'tw-rail-tabs' );
-		const help = h( 'button', 'tw-rail-btn', { type: 'button', 'aria-label': 'Controls', 'data-tip': 'Controls (F1)', 'data-tip-side': 'left', html: icon( 'help' ) } );
+		const help = h( 'button', 'tw-rail-btn', { type: 'button', 'aria-label': '控制', 'data-tip': '控制 (F1)', 'data-tip-side': 'left', html: icon( 'help' ) } );
 		help.addEventListener( 'click', () => this.toggleHelp() );
 		rail.append( open, h( 'span', 'tw-rail-sep' ), this.railTabs, h( 'span', 'tw-rail-sep' ), help );
 
