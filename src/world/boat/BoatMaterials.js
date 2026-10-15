@@ -343,21 +343,17 @@ export class BoatMaterials {
 	let strand = sin( ( u.x / 0.07 + u.y ) * ( TWO_PI * 3.0 ) );
 	let ropeShade = boatLstep( -0.7, 0.7, strand ) * 0.4 + 0.6;
 
-// Binance logo (closer)
-let uv = ( u - 0.5 ) * 1.8;
-let aa = fwidth( abs( uv.x ) + abs( uv.y ) ) * 1.2;
-// outer frame with side gaps
-let outer = 1.0 - smoothstep( 0.8 - aa, 0.8 + aa, abs( uv.x ) + abs( uv.y ) );
-let sideGap = step( 0.32, abs( uv.x ) ) * step( abs( uv.y ), 0.28 );
-let frame = outer * ( 1.0 - sideGap );
-// center diamond
-let center = 1.0 - smoothstep( 0.18 - aa, 0.18 + aa, abs( uv.x ) + abs( uv.y ) );
-// left / right small diamonds
-let left = 1.0 - smoothstep( 0.11 - aa, 0.11 + aa, abs( uv.x + 0.52 ) + abs( uv.y ) );
-let right = 1.0 - smoothstep( 0.11 - aa, 0.11 + aa, abs( uv.x - 0.52 ) + abs( uv.y ) );
-let shape = max( frame + center, max( left, right ) );
-let flag = mix( ${ col( 0xffffff ) }, ${ col( 0xf3ba2f ) }, sat( shape ) );
-
+// 五星红旗
+let flag = ${ col( 0xde2910 ) };
+// 大五角星
+let big = boatInvstep( 0.08, 0.12, length( u - vec2f( 0.18, 0.82 ) ) );
+// 四颗小五角星（简化为圆点）
+let s1 = boatInvstep( 0.03, 0.05, length( u - vec2f( 0.32, 0.9 ) ) );
+let s2 = boatInvstep( 0.03, 0.05, length( u - vec2f( 0.38, 0.78 ) ) );
+let s3 = boatInvstep( 0.03, 0.05, length( u - vec2f( 0.32, 0.66 ) ) );
+let s4 = boatInvstep( 0.03, 0.05, length( u - vec2f( 0.22, 0.72 ) ) );
+let stars = max( max( max( big, s1 ), max( s2, s3 ) ), s4 );
+let flag = mix( flag, ${ col( 0xffde00 ) }, stars );
 
 	var c = mix( vColor, vColor * ropeShade, boatIsPattern( aux.z, 1.0 ) );
 	c = mix( c, flag, boatIsPattern( aux.z, 2.0 ) );
