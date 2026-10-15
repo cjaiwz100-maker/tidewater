@@ -343,22 +343,18 @@ export class BoatMaterials {
 	let strand = sin( ( u.x / 0.07 + u.y ) * ( TWO_PI * 3.0 ) );
 	let ropeShade = boatLstep( -0.7, 0.7, strand ) * 0.4 + 0.6;
 
-// Binance logo (precise)
-let uv = ( u - 0.5 ) * 1.8;
-let d = abs( uv.x ) + abs( uv.y );
-let aa = fwidth( d ) * 1.5;
-// outer diamond
-let outer = 1.0 - smoothstep( 0.85 - aa, 0.85 + aa, d );
-// middle cut
-let cut = 1.0 - smoothstep( 0.48 - aa, 0.48 + aa, d );
+// Binance logo
+let uv = ( u - 0.5 ) * 1.7;
+let aa = fwidth( abs( uv.x ) + abs( uv.y ) );
+// outer frame
+let outer = 1.0 - smoothstep( 0.82 - aa, 0.82 + aa, abs( uv.x ) + abs( uv.y ) );
+let cut = 1.0 - smoothstep( 0.5 - aa, 0.5 + aa, abs( uv.x ) + abs( uv.y ) );
 // center diamond
-let center = 1.0 - smoothstep( 0.22 - aa, 0.22 + aa, d );
-// left / right small diamonds
-let lx = abs( uv.x + 0.62 ) + abs( uv.y );
-let rx = abs( uv.x - 0.62 ) + abs( uv.y );
-let left = 1.0 - smoothstep( 0.16 - aa, 0.16 + aa, lx );
-let right = 1.0 - smoothstep( 0.16 - aa, 0.16 + aa, rx );
-let shape = max( max( outer * ( 1.0 - cut * 0.85 ) + center, left ), right );
+let center = 1.0 - smoothstep( 0.2 - aa, 0.2 + aa, abs( uv.x ) + abs( uv.y ) );
+// left / right
+let left = 1.0 - smoothstep( 0.13 - aa, 0.13 + aa, abs( uv.x + 0.6 ) + abs( uv.y ) );
+let right = 1.0 - smoothstep( 0.13 - aa, 0.13 + aa, abs( uv.x - 0.6 ) + abs( uv.y ) );
+let shape = max( max( outer - cut * 0.75 + center, left ), right );
 let flag = mix( ${ col( 0xffffff ) }, ${ col( 0xf3ba2f ) }, sat( shape ) );
 
 	var c = mix( vColor, vColor * ropeShade, boatIsPattern( aux.z, 1.0 ) );
