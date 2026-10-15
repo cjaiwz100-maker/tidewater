@@ -187,7 +187,7 @@ presets: Object.keys( SEA ).map( ( k ) => ( {
 		// ---------------------------------------------------------------- Camera
 		const cam = ui.addTab( 'camera', '相机', 'camera' );
 		const view = cam.addFolder( '视角', { icon: 'camera' } );
-		view.addSelect( { label: '船只相机', object: s, key: 'camMode', options: [ { label: '1st person', value: 'first' }, { label: '3rd person', value: 'third' } ], onChange: ( v ) => { app.player.camMode = v; } } );
+		view.addSelect( { label: '船只相机', object: s, key: 'camMode', options: [ { label: '第一人称', value: 'first' }, { label: '第三人称', value: 'third' } ], onChange: ( v ) => { app.player.camMode = v; } } );
 		view.addSlider( { label: '视野', object: s, key: 'fov', min: 35, max: 100, step: 1, unit: '°', onChange: ( v ) => {
 
 			app.camera.fov = v;
