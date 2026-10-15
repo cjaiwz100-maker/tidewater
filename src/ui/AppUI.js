@@ -215,10 +215,10 @@ presets: Object.keys( SEA ).map( ( k ) => ( {
 
 		post.addSlider( { label: '泛光', object: s, key: 'bloom', min: 0, max: 0.3, step: 0.005, onChange: ( v ) => { P.bloom.value = v; } } );
 		if ( app.post.flare ) post.addSlider( { label: '镜头光晕', object: s, key: 'flare', min: 0, max: 2, step: 0.05, onChange: ( v ) => { app.post.flare.strength.value = v; } } );
-		post.addSlider( { label: 'Saturation', object: s, key: '饱和度', min: 0.5, max: 1.5, step: 0.01, onChange: ( v ) => { P.saturation.value = v; } } );
-		post.addSlider( { label: 'Contrast', object: s, key: '对比度', min: 0.8, max: 1.3, step: 0.01, onChange: ( v ) => { P.contrast.value = v; } } );
-		post.addSlider( { label: 'Vignette', object: s, key: '暗角', min: 0, max: 1, step: 0.01, onChange: ( v ) => { P.vignette.value = v; } } );
-		post.addSlider( { label: 'Film grain', object: s, key: '胶片颗粒', min: 0, max: 0.06, step: 0.001, onChange: ( v ) => { P.grain.value = v; } } );
+		post.addSlider( { label: '饱和度', object: s, key: '饱和度', min: 0.5, max: 1.5, step: 0.01, onChange: ( v ) => { P.saturation.value = v; } } );
+		post.addSlider( { label: '对比度', object: s, key: '对比度', min: 0.8, max: 1.3, step: 0.01, onChange: ( v ) => { P.contrast.value = v; } } );
+		post.addSlider( { label: '暗角', object: s, key: '暗角', min: 0, max: 1, step: 0.01, onChange: ( v ) => { P.vignette.value = v; } } );
+		post.addSlider( { label: '胶片颗粒', object: s, key: '胶片颗粒', min: 0, max: 0.06, step: 0.001, onChange: ( v ) => { P.grain.value = v; } } );
 
 		// ---------------------------------------------------------------- Performance
 		const perf = ui.addTab( 'performance', '性能', 'performance' );
