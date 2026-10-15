@@ -343,11 +343,16 @@ export class BoatMaterials {
 	let strand = sin( ( u.x / 0.07 + u.y ) * ( TWO_PI * 3.0 ) );
 	let ropeShade = boatLstep( -0.7, 0.7, strand ) * 0.4 + 0.6;
 
-// Binance logo: yellow diamond on black
-let center = vec2f( 0.5, 0.5 );
-let d = abs( u.x - center.x ) + abs( u.y - center.y );
-let diamond = boatInvstep( 0.28, 0.32, d );
-let flag = mix( ${ col( 0x0a0a0a ) }, ${ col( 0xf0b90b ) }, diamond );
+// Binance logo: yellow diamond with black background
+let uv = u - 0.5;
+let diamond = abs( uv.x ) + abs( uv.y );
+let edge = 0.38;
+let aa = fwidth( diamond );
+let logo = 1.0 - smoothstep( edge - aa, edge + aa, diamond );
+// inner cut for the classic Binance look
+let inner = 1.0 - smoothstep( 0.22 - aa, 0.22 + aa, diamond );
+let shape = logo * ( 1.0 - inner * 0.15 );
+let flag = mix( ${ col( 0x111111 ) }, ${ col( 0xf3ba2f ) }, shape );
 
 	var c = mix( vColor, vColor * ropeShade, boatIsPattern( aux.z, 1.0 ) );
 	c = mix( c, flag, boatIsPattern( aux.z, 2.0 ) );
