@@ -2108,7 +2108,7 @@ foot.innerHTML = '<span><kbd>H</kbd>隐藏</span><span><kbd>F1</kbd>控制</span
 
 		// collapsed state: a slim rail of tab icons
 		const rail = this.rail = h( 'nav', 'tw-rail tw-glass tw-interactive', { 'aria-label': 'Settings' } );
-		const open = h( 'button', 'tw-rail-btn tw-rail-open', { type: 'button', 'aria-label': 'Open settings', 'data-tip': 'Settings (H)', 'data-tip-side': 'left', html: icon( 'sliders' ) } );
+		const open = h( 'button', 'tw-rail-btn tw-rail-open', { type: 'button', 'aria-label': '打开设置', 'data-tip': '设置 (H)', 'data-tip-side': 'left', html: icon( 'sliders' ) } );
 		open.addEventListener( 'click', () => this.togglePanel( true ) );
 		this.railTabs = h( 'div', 'tw-rail-tabs' );
 		const help = h( 'button', 'tw-rail-btn', { type: 'button', 'aria-label': 'Controls', 'data-tip': 'Controls (F1)', 'data-tip-side': 'left', html: icon( 'help' ) } );
