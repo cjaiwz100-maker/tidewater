@@ -123,8 +123,8 @@ function skyAt( hour ) {
 
 }
 
-const PHASES = [ [ 4.8, 'Night' ], [ 5.6, 'Dawn' ], [ 6.4, 'Sunrise' ], [ 7.2, 'Golden hour' ], [ 10.5, 'Morning' ],
-	[ 13.5, 'Midday' ], [ 16.8, 'Afternoon' ], [ 17.6, 'Golden hour' ], [ 18.4, 'Sunset' ], [ 19.3, 'Dusk' ], [ 24, 'Night' ] ];
+const PHASES = [ [ 4.8, '夜晚' ], [ 5.6, '黎明' ], [ 6.4, '日出' ], [ 7.2, '黄金时段' ], [ 10.5, '早晨' ],
+    [ 13.5, '正午' ], [ 16.8, '下午' ], [ 17.6, '黄金时段' ], [ 18.4, '日落' ], [ 19.3, '黄昏' ], [ 24, '夜晚' ] ];
 
 const phaseAt = ( hh ) => {
 
@@ -1360,7 +1360,7 @@ class TimeOfDayControl extends Control {
 
 	constructor( parent, o ) {
 
-		super( parent, Object.assign( {}, o, { label: o.label ?? 'Time of day' } ), 'time' );
+		super( parent, Object.assign( {}, o, { label: o.label ?? '一天中的时间' } ), 'time' );
 		this._default = Number( this.value ) || 0;
 		this.onFinishChange = o.onFinishChange || null;
 		const id = uid( 'tw-tod' );
