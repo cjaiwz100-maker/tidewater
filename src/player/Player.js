@@ -747,7 +747,7 @@ export class Player {
 		if ( inp.down( 'KeyA' ) ) steer += 1;
 		if ( inp.down( 'KeyD' ) ) steer -= 1;
 		b.setInput( throttle, steer, dt );
-		this.prompt = { key: 'E', text: 'Leave helm   ·   V  camera' };
+		this.prompt = { key: 'E', text: '离开驾驶   ·   V  驾驶视角' };
 
 		// keep the player attached (for audio / queries)
 		b.toWorld( b.model.helmEye, this.position );
